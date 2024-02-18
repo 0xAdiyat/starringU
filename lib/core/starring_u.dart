@@ -15,6 +15,7 @@ class StarringU extends ConsumerWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: lightTheme,
       darkTheme: darkTheme,
