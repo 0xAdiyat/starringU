@@ -37,6 +37,6 @@
 
 We welcome contributions to the project! Please see the CONTRIBUTING.md file for guidelines.
 
-**License:**
+### License:
 
 This project is licensed under the MIT License.
