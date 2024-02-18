@@ -6,7 +6,7 @@ part of 'http.client.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$httpClientHash() => r'0a40adc15d1676950e96327811a188f2a852a426';
+String _$httpClientHash() => r'548260978d9309a918c02f1b4dd1a10155293508';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,9 +41,11 @@ class HttpClientFamily extends Family<Dio> {
   /// See also [httpClient].
   HttpClientProvider call({
     bool enableLogging = true,
+    Map<String, dynamic>? queryParameters,
   }) {
     return HttpClientProvider(
       enableLogging: enableLogging,
+      queryParameters: queryParameters,
     );
   }
 
@@ -53,6 +55,7 @@ class HttpClientFamily extends Family<Dio> {
   ) {
     return call(
       enableLogging: provider.enableLogging,
+      queryParameters: provider.queryParameters,
     );
   }
 
@@ -76,10 +79,12 @@ class HttpClientProvider extends AutoDisposeProvider<Dio> {
   /// See also [httpClient].
   HttpClientProvider({
     bool enableLogging = true,
+    Map<String, dynamic>? queryParameters,
   }) : this._internal(
           (ref) => httpClient(
             ref as HttpClientRef,
             enableLogging: enableLogging,
+            queryParameters: queryParameters,
           ),
           from: httpClientProvider,
           name: r'httpClientProvider',
@@ -91,6 +96,7 @@ class HttpClientProvider extends AutoDisposeProvider<Dio> {
           allTransitiveDependencies:
               HttpClientFamily._allTransitiveDependencies,
           enableLogging: enableLogging,
+          queryParameters: queryParameters,
         );
 
   HttpClientProvider._internal(
@@ -101,9 +107,11 @@ class HttpClientProvider extends AutoDisposeProvider<Dio> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.enableLogging,
+    required this.queryParameters,
   }) : super.internal();
 
   final bool enableLogging;
+  final Map<String, dynamic>? queryParameters;
 
   @override
   Override overrideWith(
@@ -119,6 +127,7 @@ class HttpClientProvider extends AutoDisposeProvider<Dio> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         enableLogging: enableLogging,
+        queryParameters: queryParameters,
       ),
     );
   }
@@ -130,13 +139,16 @@ class HttpClientProvider extends AutoDisposeProvider<Dio> {
 
   @override
   bool operator ==(Object other) {
-    return other is HttpClientProvider && other.enableLogging == enableLogging;
+    return other is HttpClientProvider &&
+        other.enableLogging == enableLogging &&
+        other.queryParameters == queryParameters;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, enableLogging.hashCode);
+    hash = _SystemHash.combine(hash, queryParameters.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -145,6 +157,9 @@ class HttpClientProvider extends AutoDisposeProvider<Dio> {
 mixin HttpClientRef on AutoDisposeProviderRef<Dio> {
   /// The parameter `enableLogging` of this provider.
   bool get enableLogging;
+
+  /// The parameter `queryParameters` of this provider.
+  Map<String, dynamic>? get queryParameters;
 }
 
 class _HttpClientProviderElement extends AutoDisposeProviderElement<Dio>
@@ -153,6 +168,9 @@ class _HttpClientProviderElement extends AutoDisposeProviderElement<Dio>
 
   @override
   bool get enableLogging => (origin as HttpClientProvider).enableLogging;
+  @override
+  Map<String, dynamic>? get queryParameters =>
+      (origin as HttpClientProvider).queryParameters;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

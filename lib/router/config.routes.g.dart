@@ -7,17 +7,17 @@ part of 'config.routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $homeRoute,
+      $narratorRoute,
       $splashRoute,
     ];
 
-RouteBase get $homeRoute => GoRouteData.$route(
+RouteBase get $narratorRoute => GoRouteData.$route(
       path: '/',
-      factory: $HomeRouteExtension._fromState,
+      factory: $NarratorRouteExtension._fromState,
     );
 
-extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
+extension $NarratorRouteExtension on NarratorRoute {
+  static NarratorRoute _fromState(GoRouterState state) => const NarratorRoute();
 
   String get location => GoRouteData.$location(
         '/',
