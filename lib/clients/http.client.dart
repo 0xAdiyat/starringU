@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:starring_u/clients/talker.dart';
+import 'package:starring_u/src/shared/data/json.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 
 part 'http.client.g.dart';
@@ -10,9 +11,10 @@ const baseUrl = '';
 const apiKey = String.fromEnvironment('GPT_API_KEY');
 
 @riverpod
-Dio httpClient(HttpClientRef ref, {bool enableLogging = true}) {
-  final options =
-      BaseOptions(baseUrl: baseUrl, queryParameters: {'key': apiKey});
+Dio httpClient(HttpClientRef ref,
+    {bool enableLogging = true, Json? queryParameters}) {
+  final options = BaseOptions(
+      baseUrl: baseUrl, queryParameters: queryParameters ?? {'key': apiKey});
   final client = Dio(options);
   ref.onDispose(client.close);
 
