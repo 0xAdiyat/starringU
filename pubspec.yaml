@@ -15,12 +15,12 @@ dependencies:
     sdk: flutter
 
 
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.6
   talker_flutter: ^4.0.2
   hooks_riverpod: ^2.4.10
   flutter_hooks: ^0.20.5
   riverpod_annotation: ^2.3.4
-  connectivity_plus: ^2.3.8
+  connectivity_plus: ^5.0.2
   dio: ^5.4.0
   talker_dio_logger: ^4.0.2
   google_fonts: ^6.1.0
