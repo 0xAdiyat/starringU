@@ -16,14 +16,16 @@ class StandardErrorWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon ?? Icons.sentiment_very_dissatisfied),
-          Text(message ?? 'Something went wrong..'),
-        ],
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon ?? Icons.sentiment_very_dissatisfied),
+            Text(message ?? 'Something went wrong..'),
+          ],
+        ),
       ),
     );
   }
