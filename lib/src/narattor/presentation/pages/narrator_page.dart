@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:camera/camera.dart';
 import 'package:starring_u/clients/talker.dart';
-import 'package:starring_u/src/narattor/presentation/providers/picture_capture.provider.dart';
+import 'package:starring_u/src/narattor/data/repository/picture_capture.repository.dart';
 import 'package:starring_u/src/shared/presentation/pages/error_page.dart';
 import 'package:starring_u/src/shared/presentation/widgets/standard_error_widget.dart';
 import 'package:starring_u/src/shared/presentation/widgets/standard_loading_widget.dart';
@@ -57,8 +57,7 @@ class TakePictureScreen extends HookConsumerWidget {
     useEffect(() {
       cameraController = useCameraController(
           description: camera, resolutionPreset: ResolutionPreset.medium);
-      ref.read(pictureCaptureRepositoryProviderProvider(
-          controller: cameraController));
+      ref.read(pictureCaptureRepositoryProvider(cameraController));
       return null;
     }, const []);
 

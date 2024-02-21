@@ -1,27 +1,34 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:camera/camera.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:starring_u/clients/talker.dart';
 
-part 'picture_capture.provider.g.dart';
+part 'picture_capture.repository.g.dart';
 
 const kPictureClickTimerDuration = Duration(seconds: 5);
 
 @riverpod
-class PictureCaptureRepositoryProvider
-    extends _$PictureCaptureRepositoryProvider {
-  late final Timer pictureTimer;
+PictureCaptureRepository pictureCaptureRepository(
+    PictureCaptureRepositoryRef ref, CameraController controller) {
+  return PictureCaptureRepository(controller: controller, ref: ref);
+}
 
-  @override
-  FutureOr<void> build({required CameraController controller}) async {
-    await _initializeCamera();
+class PictureCaptureRepository {
+  late Timer pictureTimer;
+  final CameraController _controller;
+  final Ref _ref;
+  PictureCaptureRepository(
+      {required CameraController controller, required Ref ref})
+      : _controller = controller,
+        _ref = ref {
+    _initializeCamera();
 
     if (controller.value.isInitialized) {
       talker.debug("I'm being called");
-      await _capturePicturePeriodically();
+      _capturePicturePeriodically();
     }
 
     _dispose();
@@ -29,7 +36,7 @@ class PictureCaptureRepositoryProvider
 
   Future<void> _initializeCamera() async {
     try {
-      await controller.initialize();
+      await _controller.initialize();
     } catch (e) {
       talker.error('Error initializing camera: $e');
     }
@@ -43,8 +50,8 @@ class PictureCaptureRepositoryProvider
 
   Future<void> _capturePicture() async {
     try {
-      if (!controller.value.isTakingPicture) {
-        final image = await controller.takePicture();
+      if (!_controller.value.isTakingPicture) {
+        final image = await _controller.takePicture();
         talker.debug('Clicked pictures: ${image.toString()}');
       }
     } catch (e) {
@@ -53,9 +60,9 @@ class PictureCaptureRepositoryProvider
   }
 
   void _dispose() {
-    ref.onDispose(() {
+    _ref.onDispose(() {
       pictureTimer.cancel();
-      controller.dispose();
+      _controller.dispose();
     });
   }
 }
