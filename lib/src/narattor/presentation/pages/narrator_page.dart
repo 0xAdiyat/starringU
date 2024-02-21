@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:camera/camera.dart';
 import 'package:starring_u/clients/talker.dart';
+import 'package:starring_u/src/narattor/presentation/providers/picture_capture.provider.dart';
 import 'package:starring_u/src/shared/presentation/pages/error_page.dart';
 import 'package:starring_u/src/shared/presentation/widgets/standard_error_widget.dart';
 import 'package:starring_u/src/shared/presentation/widgets/standard_loading_widget.dart';
@@ -49,37 +52,20 @@ class TakePictureScreen extends HookConsumerWidget {
   const TakePictureScreen(this.camera, {super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    late CameraController controller;
-    late Future<void> initializeControllerFuture;
+    late final CameraController cameraController;
 
     useEffect(() {
-      controller = useCameraController(
+      cameraController = useCameraController(
           description: camera, resolutionPreset: ResolutionPreset.medium);
-
-      initializeControllerFuture = controller.initialize();
-      return;
-    }, []);
+      ref.read(pictureCaptureRepositoryProviderProvider(
+          controller: cameraController));
+      return null;
+    }, const []);
 
     return Scaffold(
-      body: FutureBuilder<void>(
-        future: initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return CameraPreview(controller);
-          } else {
-            return const Center(child: StandardLoadingWidget());
-          }
-        },
-      ),
+      body: const Text("Something"),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          try {
-            await initializeControllerFuture;
-            final image = await controller.takePicture();
-          } catch (e) {
-            talker.error('Error taking picture: $e');
-          }
-        },
+        onPressed: () {},
         child: const Icon(Icons.camera_alt),
       ),
     );
