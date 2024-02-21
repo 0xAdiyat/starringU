@@ -24,11 +24,15 @@ class PictureCaptureRepository {
       {required CameraController controller, required Ref ref})
       : _controller = controller,
         _ref = ref {
-    _initializeCamera();
+    _initialize();
+  }
 
-    if (controller.value.isInitialized) {
+  Future<void> _initialize() async {
+    await _initializeCamera();
+
+    if (_controller.value.isInitialized) {
       talker.debug("I'm being called");
-      _capturePicturePeriodically();
+      await _capturePicturePeriodically();
     }
 
     _dispose();
