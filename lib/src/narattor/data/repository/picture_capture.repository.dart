@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:starring_u/clients/talker.dart';
+import 'package:starring_u/core/utils/constants/k.constants.dart';
 
 part 'picture_capture.repository.g.dart';
-
-const kPictureClickTimerDuration = Duration(seconds: 5);
 
 @riverpod
 PictureCaptureRepository pictureCaptureRepository(
@@ -31,10 +29,8 @@ class PictureCaptureRepository {
     await _initializeCamera();
 
     if (_controller.value.isInitialized) {
-      talker.debug("I'm being called");
-      await _capturePicturePeriodically();
+      _capturePicturePeriodically();
     }
-
     _dispose();
   }
 
@@ -47,7 +43,8 @@ class PictureCaptureRepository {
   }
 
   Future<void> _capturePicturePeriodically() async {
-    pictureTimer = Timer.periodic(kPictureClickTimerDuration, (_) async {
+    pictureTimer =
+        Timer.periodic(KConstants.kPictureClickTimerDuration, (_) async {
       await _capturePicture();
     });
   }
@@ -56,7 +53,7 @@ class PictureCaptureRepository {
     try {
       if (!_controller.value.isTakingPicture) {
         final image = await _controller.takePicture();
-        talker.debug('Clicked pictures: ${image.toString()}');
+        talker.debug('Clicked pictures: ${image.path}');
       }
     } catch (e) {
       talker.error('Error taking picture: $e');
@@ -65,6 +62,7 @@ class PictureCaptureRepository {
 
   void _dispose() {
     _ref.onDispose(() {
+      talker.debug("Disposed");
       pictureTimer.cancel();
       _controller.dispose();
     });
