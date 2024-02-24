@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:starring_u/router/router.dart';
-import 'package:starring_u/theme/dark_theme.dart';
-import 'package:starring_u/theme/light_theme.dart';
 
 class StarringU extends ConsumerWidget {
   const StarringU({super.key});
@@ -17,8 +16,8 @@ class StarringU extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      theme: ThemeData.dark(),
+      darkTheme: ThemeData.light(),
     );
   }
 }

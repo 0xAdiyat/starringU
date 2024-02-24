@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+
 class StarringUProviderObserver extends ProviderObserver {
   const StarringUProviderObserver(this._talker);
   final Talker _talker;
@@ -11,13 +12,13 @@ class StarringUProviderObserver extends ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    _talker.verbose(
+    _talker.log(
       '$provider has been created\n'
       '\tInitial value:\n'
       '\t\t$value',
     );
   }
- 
+
   @override
   void providerDidFail(
     ProviderBase<Object?> provider,
@@ -39,7 +40,7 @@ class StarringUProviderObserver extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    _talker.verbose(
+    _talker.log(
       '$provider updated\n'
       '\tOld value:\n'
       '\t\t$previousValue\n'
@@ -53,6 +54,6 @@ class StarringUProviderObserver extends ProviderObserver {
     ProviderBase<Object?> provider,
     ProviderContainer container,
   ) {
-    _talker.verbose('$provider has been disposed');
+    _talker.log('$provider has been disposed');
   }
 }
