@@ -1,6 +1,6 @@
 class KConstants {
   // Durations
-  static const kPictureClickTimerDuration = Duration(seconds: 10);
+  static const kPictureClickTimerDuration = Duration(seconds: 5);
   static const apiTimeOut = Duration(seconds: 20);
 
   // Others

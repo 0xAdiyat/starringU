@@ -5,17 +5,17 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:starring_u/clients/talker.dart';
 import 'package:starring_u/core/utils/constants/k.constants.dart';
+import 'package:starring_u/logs/custom_talker_router_observer.dart';
 
 part 'picture_capture.repository.g.dart';
 
 @riverpod
 PictureCaptureRepository pictureCaptureRepository(
-    PictureCaptureRepositoryRef ref, CameraController controller) {
-  return PictureCaptureRepository(controller: controller, ref: ref);
+    PictureCaptureRepositoryRef ref, CameraController cameraController) {
+  return PictureCaptureRepository(controller: cameraController, ref: ref);
 }
 
 class PictureCaptureRepository {
-  late Timer pictureTimer;
   final CameraController _controller;
   final Ref _ref;
   PictureCaptureRepository(
@@ -28,10 +28,7 @@ class PictureCaptureRepository {
   Future<void> _initialize() async {
     await _initializeCamera();
 
-    if (_controller.value.isInitialized) {
-      _capturePicturePeriodically();
-    }
-    _dispose();
+    _capturePicturePeriodically();
   }
 
   Future<void> _initializeCamera() async {
@@ -43,9 +40,15 @@ class PictureCaptureRepository {
   }
 
   Future<void> _capturePicturePeriodically() async {
-    pictureTimer =
-        Timer.periodic(KConstants.kPictureClickTimerDuration, (_) async {
-      await _capturePicture();
+    Timer.periodic(KConstants.kPictureClickTimerDuration, (Timer t) {
+      if (_ref.watch(routeStateProvider) != "/") {
+        t.cancel();
+        dispose();
+        return;
+      } else if (_controller.value.isInitialized) {
+        _capturePicture();
+      }
+      return;
     });
   }
 
@@ -60,11 +63,9 @@ class PictureCaptureRepository {
     }
   }
 
-  void _dispose() {
-    _ref.onDispose(() {
-      talker.debug("Disposed");
-      pictureTimer.cancel();
+  void dispose() {
+    if (_controller.value.isInitialized) {
       _controller.dispose();
-    });
+    }
   }
 }

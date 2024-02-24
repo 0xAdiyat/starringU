@@ -7,7 +7,7 @@ part of 'picture_capture.repository.dart';
 // **************************************************************************
 
 String _$pictureCaptureRepositoryHash() =>
-    r'bd11d8ca323034ee6d8d6672903269748bb5ff28';
+    r'b54ab2c3e05611ee62f067156be34ffe441b45fd';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,10 +41,10 @@ class PictureCaptureRepositoryFamily extends Family<PictureCaptureRepository> {
 
   /// See also [pictureCaptureRepository].
   PictureCaptureRepositoryProvider call(
-    CameraController controller,
+    CameraController cameraController,
   ) {
     return PictureCaptureRepositoryProvider(
-      controller,
+      cameraController,
     );
   }
 
@@ -53,7 +53,7 @@ class PictureCaptureRepositoryFamily extends Family<PictureCaptureRepository> {
     covariant PictureCaptureRepositoryProvider provider,
   ) {
     return call(
-      provider.controller,
+      provider.cameraController,
     );
   }
 
@@ -77,11 +77,11 @@ class PictureCaptureRepositoryProvider
     extends AutoDisposeProvider<PictureCaptureRepository> {
   /// See also [pictureCaptureRepository].
   PictureCaptureRepositoryProvider(
-    CameraController controller,
+    CameraController cameraController,
   ) : this._internal(
           (ref) => pictureCaptureRepository(
             ref as PictureCaptureRepositoryRef,
-            controller,
+            cameraController,
           ),
           from: pictureCaptureRepositoryProvider,
           name: r'pictureCaptureRepositoryProvider',
@@ -92,7 +92,7 @@ class PictureCaptureRepositoryProvider
           dependencies: PictureCaptureRepositoryFamily._dependencies,
           allTransitiveDependencies:
               PictureCaptureRepositoryFamily._allTransitiveDependencies,
-          controller: controller,
+          cameraController: cameraController,
         );
 
   PictureCaptureRepositoryProvider._internal(
@@ -102,10 +102,10 @@ class PictureCaptureRepositoryProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.controller,
+    required this.cameraController,
   }) : super.internal();
 
-  final CameraController controller;
+  final CameraController cameraController;
 
   @override
   Override overrideWith(
@@ -121,7 +121,7 @@ class PictureCaptureRepositoryProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        controller: controller,
+        cameraController: cameraController,
       ),
     );
   }
@@ -134,13 +134,13 @@ class PictureCaptureRepositoryProvider
   @override
   bool operator ==(Object other) {
     return other is PictureCaptureRepositoryProvider &&
-        other.controller == controller;
+        other.cameraController == cameraController;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, controller.hashCode);
+    hash = _SystemHash.combine(hash, cameraController.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -148,8 +148,8 @@ class PictureCaptureRepositoryProvider
 
 mixin PictureCaptureRepositoryRef
     on AutoDisposeProviderRef<PictureCaptureRepository> {
-  /// The parameter `controller` of this provider.
-  CameraController get controller;
+  /// The parameter `cameraController` of this provider.
+  CameraController get cameraController;
 }
 
 class _PictureCaptureRepositoryProviderElement
@@ -158,8 +158,8 @@ class _PictureCaptureRepositoryProviderElement
   _PictureCaptureRepositoryProviderElement(super.provider);
 
   @override
-  CameraController get controller =>
-      (origin as PictureCaptureRepositoryProvider).controller;
+  CameraController get cameraController =>
+      (origin as PictureCaptureRepositoryProvider).cameraController;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

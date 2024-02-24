@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:starring_u/clients/talker.dart';
 import 'package:starring_u/core/utils/constants/resources/app_styles.manager.constants.dart';
 import 'package:starring_u/core/utils/extensions/non_null.ext.dart';
+import 'package:starring_u/logs/custom_talker_router_observer.dart';
 import 'package:starring_u/router/config.routes.dart';
 import 'package:starring_u/src/narattor/data/repository/picture_capture.repository.dart';
 import 'package:starring_u/src/shared/presentation/widgets/standard_error_widget.dart';
@@ -64,14 +65,10 @@ class NarratorPage extends HookConsumerWidget {
 
   /// Functions
   void _captureAndProcess(CameraDescription camera, WidgetRef ref) {
-    useEffect(() {
+    if (ref.watch(routeStateProvider) == "/") {
       final cameraController = useCameraController(
           description: camera, resolutionPreset: ResolutionPreset.medium);
-
       ref.read(pictureCaptureRepositoryProvider(cameraController));
-      return () {
-        talker.debug("DISPOSED in narrator page");
-      };
-    }, const []);
+    }
   }
 }

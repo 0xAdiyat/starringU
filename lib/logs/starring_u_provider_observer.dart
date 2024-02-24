@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+
 class StarringUProviderObserver extends ProviderObserver {
   const StarringUProviderObserver(this._talker);
   final Talker _talker;
