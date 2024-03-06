@@ -2,13 +2,13 @@
 
 **starringU** is a mobile application built with Flutter that utilizes AI to provide a humorous and informative narration of the user's surroundings, inspired by nature documentaries.
 
-### Features:
+### Features
 
 * **Real-time AI-powered narration:** Analyzes live camera feed and generates witty commentary.
 * **Multiple narration styles:** Choose from various styles to personalize your experience.
 * **User-friendly interface:** Simple and intuitive for everyone to enjoy.
 
-### ToDo List:
+### ToDo List
 
 - [ ] Implement core functionalities:
   - [x] Camera Integration with auto click
@@ -20,7 +20,7 @@
 - [ ] Design and implement a user-friendly interface.
 
 
-### Tech Stack:
+### Tech Stack
 
 * **Frontend:** Flutter
 * **Camera Integration:** camera package
@@ -52,7 +52,7 @@
 > please feel free to contribute and send a [pull request](https://github.com/0xAdiyat/starringU/pulls). I welcome and encourage all pull requests. It usually takes me within 24-48 hours to respond to any issue or request.
 
 
-## Author
+### Author
 @0xAdiyat
 
 <br>
