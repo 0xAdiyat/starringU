@@ -11,7 +11,7 @@
 ### ToDo List:
 
 - [ ] Implement core functionalities:
-  - [ ] Camera Integration with auto click
+  - [x] Camera Integration with auto click
   - [ ] Setting up Gemini for object detection
   - [ ] Perform clicked image compression
   - [ ] Implementing Langchain
@@ -26,17 +26,34 @@
 * **Camera Integration:** camera package
 * **Natural Language Processing:** Gemini-Pro
 
-### Getting Started:
+### Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/0xAdiyat/starringU.git
+   ```
 
-1. Clone this repository.
-2. Install dependencies: `flutter pub get`
-3. Set up your development environment (Flutter & chosen libraries)
-4. Run the app: `flutter run`
+2. Install dependencies:
+   ```bash
+    flutter pub get
+   ```
 
-### Contributing:
+3. Open the project in VSCode:
+   ```bash
+   cd starringU
+   code .
+   ```
+4. Run the app:
+   ```bash
+    flutter run
+   ```
 
-We welcome contributions to the project! Please see the CONTRIBUTING.md file for guidelines.
+> [!IMPORTANT]
+> If you wish to contribute a change to any of the existing features or add new ones to this repo,
+> please feel free to contribute and send a [pull request](https://github.com/0xAdiyat/starringU/pulls). I welcome and encourage all pull requests. It usually takes me within 24-48 hours to respond to any issue or request.
 
-### License:
 
-This project is licensed under the MIT License.
+## Author
+@0xAdiyat
+
+<br>
+<p align="right">● <a href="#dialogix-top">back to top</a></p>
