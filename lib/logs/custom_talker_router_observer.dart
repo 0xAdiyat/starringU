@@ -1,8 +1,19 @@
 import 'package:flutter/src/widgets/navigator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
-final routeStateProvider = StateProvider<dynamic>((ref) => "/");
+part 'custom_talker_router_observer.g.dart';
+
+@riverpod
+class CurrentRoute extends _$CurrentRoute {
+  @override
+  String build() {
+    return "/";
+  }
+
+  void updateRoute(String currentRoute) => state = currentRoute;
+}
 
 class CustomTalkerRouterObserver extends TalkerRouteObserver {
   final Ref _ref;
@@ -14,11 +25,11 @@ class CustomTalkerRouterObserver extends TalkerRouteObserver {
     if (previousRoute == null || previousRoute.settings.name == null) {
       return;
     }
-
-    Future.microtask(() {
-      _ref.read(routeStateProvider.notifier).state =
-          previousRoute.settings.name;
-    });
+    Future.microtask(() =>
+      _ref
+          .read(currentRouteProvider.notifier)
+          .updateRoute(previousRoute.settings.name!)
+    );
   }
 
   @override
@@ -28,8 +39,10 @@ class CustomTalkerRouterObserver extends TalkerRouteObserver {
       return;
     }
 
-    Future.microtask(() {
-      _ref.read(routeStateProvider.notifier).state = route.settings.name;
-    });
+    Future.microtask(() =>
+      _ref
+          .read(currentRouteProvider.notifier)
+          .updateRoute(route.settings.name!)
+    );
   }
 }

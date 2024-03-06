@@ -7,7 +7,7 @@ enum LanguageType { ENGLISH, ARABIC }
 
 const String ARABIC = "ar";
 const String ENGLISH = "en";
-const String ASSET_PATH_LOCALISATIONS = "assets/translations";
+const String ASSET_PATH_LOCALIZATIONS = "assets/translations";
 
 const Locale ARABIC_LOCAL = Locale("ar", "SA");
 const Locale ENGLISH_LOCAL = Locale("en", "US");
@@ -41,7 +41,7 @@ class AppLocalizations {
 
   Future loadJsonLanguage() async {
     String jsonString = await rootBundle.loadString(
-        "$ASSET_PATH_LOCALISATIONS/${locale!.languageCode}-${locale!.countryCode}.json");
+        "$ASSET_PATH_LOCALIZATIONS/${locale!.languageCode}-${locale!.countryCode}.json");
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     _localizedStrings = jsonMap.map((key, value) {
