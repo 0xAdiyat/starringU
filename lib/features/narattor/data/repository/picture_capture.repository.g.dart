@@ -7,7 +7,7 @@ part of 'picture_capture.repository.dart';
 // **************************************************************************
 
 String _$pictureCaptureRepositoryHash() =>
-    r'b54ab2c3e05611ee62f067156be34ffe441b45fd';
+    r'0d844dc4d80f065c72e80f7bdf02238d41147bc2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,21 +30,30 @@ class _SystemHash {
   }
 }
 
-/// See also [pictureCaptureRepository].
-@ProviderFor(pictureCaptureRepository)
+abstract class _$PictureCaptureRepository
+    extends BuildlessAutoDisposeAsyncNotifier<void> {
+  late final CameraController controller;
+
+  FutureOr<void> build(
+    CameraController controller,
+  );
+}
+
+/// See also [PictureCaptureRepository].
+@ProviderFor(PictureCaptureRepository)
 const pictureCaptureRepositoryProvider = PictureCaptureRepositoryFamily();
 
-/// See also [pictureCaptureRepository].
-class PictureCaptureRepositoryFamily extends Family<PictureCaptureRepository> {
-  /// See also [pictureCaptureRepository].
+/// See also [PictureCaptureRepository].
+class PictureCaptureRepositoryFamily extends Family<AsyncValue<void>> {
+  /// See also [PictureCaptureRepository].
   const PictureCaptureRepositoryFamily();
 
-  /// See also [pictureCaptureRepository].
+  /// See also [PictureCaptureRepository].
   PictureCaptureRepositoryProvider call(
-    CameraController cameraController,
+    CameraController controller,
   ) {
     return PictureCaptureRepositoryProvider(
-      cameraController,
+      controller,
     );
   }
 
@@ -53,7 +62,7 @@ class PictureCaptureRepositoryFamily extends Family<PictureCaptureRepository> {
     covariant PictureCaptureRepositoryProvider provider,
   ) {
     return call(
-      provider.cameraController,
+      provider.controller,
     );
   }
 
@@ -72,17 +81,15 @@ class PictureCaptureRepositoryFamily extends Family<PictureCaptureRepository> {
   String? get name => r'pictureCaptureRepositoryProvider';
 }
 
-/// See also [pictureCaptureRepository].
+/// See also [PictureCaptureRepository].
 class PictureCaptureRepositoryProvider
-    extends AutoDisposeProvider<PictureCaptureRepository> {
-  /// See also [pictureCaptureRepository].
+    extends AutoDisposeAsyncNotifierProviderImpl<PictureCaptureRepository,
+        void> {
+  /// See also [PictureCaptureRepository].
   PictureCaptureRepositoryProvider(
-    CameraController cameraController,
+    CameraController controller,
   ) : this._internal(
-          (ref) => pictureCaptureRepository(
-            ref as PictureCaptureRepositoryRef,
-            cameraController,
-          ),
+          () => PictureCaptureRepository()..controller = controller,
           from: pictureCaptureRepositoryProvider,
           name: r'pictureCaptureRepositoryProvider',
           debugGetCreateSourceHash:
@@ -92,7 +99,7 @@ class PictureCaptureRepositoryProvider
           dependencies: PictureCaptureRepositoryFamily._dependencies,
           allTransitiveDependencies:
               PictureCaptureRepositoryFamily._allTransitiveDependencies,
-          cameraController: cameraController,
+          controller: controller,
         );
 
   PictureCaptureRepositoryProvider._internal(
@@ -102,64 +109,70 @@ class PictureCaptureRepositoryProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.cameraController,
+    required this.controller,
   }) : super.internal();
 
-  final CameraController cameraController;
+  final CameraController controller;
 
   @override
-  Override overrideWith(
-    PictureCaptureRepository Function(PictureCaptureRepositoryRef provider)
-        create,
+  FutureOr<void> runNotifierBuild(
+    covariant PictureCaptureRepository notifier,
   ) {
+    return notifier.build(
+      controller,
+    );
+  }
+
+  @override
+  Override overrideWith(PictureCaptureRepository Function() create) {
     return ProviderOverride(
       origin: this,
       override: PictureCaptureRepositoryProvider._internal(
-        (ref) => create(ref as PictureCaptureRepositoryRef),
+        () => create()..controller = controller,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        cameraController: cameraController,
+        controller: controller,
       ),
     );
   }
 
   @override
-  AutoDisposeProviderElement<PictureCaptureRepository> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<PictureCaptureRepository, void>
+      createElement() {
     return _PictureCaptureRepositoryProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
     return other is PictureCaptureRepositoryProvider &&
-        other.cameraController == cameraController;
+        other.controller == controller;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, cameraController.hashCode);
+    hash = _SystemHash.combine(hash, controller.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin PictureCaptureRepositoryRef
-    on AutoDisposeProviderRef<PictureCaptureRepository> {
-  /// The parameter `cameraController` of this provider.
-  CameraController get cameraController;
+mixin PictureCaptureRepositoryRef on AutoDisposeAsyncNotifierProviderRef<void> {
+  /// The parameter `controller` of this provider.
+  CameraController get controller;
 }
 
 class _PictureCaptureRepositoryProviderElement
-    extends AutoDisposeProviderElement<PictureCaptureRepository>
-    with PictureCaptureRepositoryRef {
+    extends AutoDisposeAsyncNotifierProviderElement<PictureCaptureRepository,
+        void> with PictureCaptureRepositoryRef {
   _PictureCaptureRepositoryProviderElement(super.provider);
 
   @override
-  CameraController get cameraController =>
-      (origin as PictureCaptureRepositoryProvider).cameraController;
+  CameraController get controller =>
+      (origin as PictureCaptureRepositoryProvider).controller;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

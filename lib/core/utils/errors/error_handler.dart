@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:starring_u/core/utils/extensions/data_source.ext.dart';
 
-import '../../models/failure.models.dart';
+import '../../generic/models/failure.models.dart';
 import '../enums/data_source.enum.dart';
 
 class ErrorHandler implements Exception {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:starring_u/src/narattor/presentation/pages/narrator_page.dart';
-import 'package:starring_u/src/splash/presentation/pages/splash_page.dart';
+import 'package:starring_u/features/narattor/presentation/pages/narrator_page.dart';
+import 'package:starring_u/features/splash/presentation/pages/splash_page.dart';
 
-import '../src/shared/presentation/pages/error_page.dart';
+import '../features/shared/presentation/pages/error_page.dart';
 
 part 'config.routes.g.dart';
 

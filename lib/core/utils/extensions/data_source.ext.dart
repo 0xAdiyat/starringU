@@ -1,4 +1,4 @@
-import '../../models/failure.models.dart';
+import '../../generic/models/failure.models.dart';
 import '../constants/response_code.constants.dart';
 import '../constants/response_message.constants.dart';
 import '../enums/data_source.enum.dart';

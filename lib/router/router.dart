@@ -3,8 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starring_u/clients/talker.dart';
 import 'package:starring_u/logs/custom_talker_router_observer.dart';
-import 'package:starring_u/src/shared/presentation/pages/error_page.dart';
-import 'package:talker_flutter/talker_flutter.dart';
+import 'package:starring_u/features/shared/presentation/pages/error_page.dart';
 
 import 'config.routes.dart';
 

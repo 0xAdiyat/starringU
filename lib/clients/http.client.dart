@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:starring_u/clients/talker.dart';
-import 'package:starring_u/src/shared/data/json.dart';
+import 'package:starring_u/features/shared/data/json.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 
 import '../core/utils/constants/k.constants.dart';
