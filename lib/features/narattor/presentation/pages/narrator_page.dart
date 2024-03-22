@@ -7,15 +7,19 @@ import 'package:starring_u/core/utils/extensions/non_null.ext.dart';
 import 'package:starring_u/logs/custom_talker_router_observer.dart';
 import 'package:starring_u/router/config.routes.dart';
 import 'package:starring_u/features/narattor/data/repository/picture_capture.repository.dart';
-import 'package:starring_u/features/shared/presentation/widgets/standard_error_widget.dart';
-import 'package:starring_u/features/shared/presentation/widgets/standard_loading_widget.dart';
+import 'package:starring_u/core/shared/presentation/widgets/standard_error_widget.dart';
+import 'package:starring_u/core/shared/presentation/widgets/standard_loading_widget.dart';
 
-import '../../../shared/presentation/hooks/hooks_controllers.dart';
+import '../../../../core/shared/presentation/hooks/hooks_controllers.dart';
 
 class NarratorPage extends HookConsumerWidget {
   const NarratorPage({super.key});
 
   @override
+
+  // Builds the UI based on the state of the camerasAsyncSnapshot.
+  // It returns different widgets based on the ConnectionState and the data from camerasAsyncSnapshot.
+  // If the currentRoute is the Narrator screen, it also sets up the camera controller and returns a Scaffold with a Column containing a Text widget.
   Widget build(BuildContext context, WidgetRef ref) {
     final result = useMemoized(() => availableCameras());
 
@@ -37,6 +41,7 @@ class NarratorPage extends HookConsumerWidget {
 
         /// This section will only run if the `currentRoute` is [Narrator screen]
         if (ref.watch(currentRouteProvider) == "/") {
+          // Set up the camera controller
           final cameraController = useCameraController(
               description: cameras!.first,
               resolutionPreset: ResolutionPreset.medium);
@@ -64,6 +69,7 @@ class NarratorPage extends HookConsumerWidget {
                   error: (Object error, StackTrace stackTrace) =>
                       StandardErrorWidget(error, stackTrace));
         }
+        // If the currentRoute is not the Narrator screen, it returns an empty container.
         return Container();
     }
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
-  AppColorsExtension({
+  const AppColorsExtension({
     required this.primary,
     required this.onPrimary,
     required this.secondary,
@@ -26,7 +27,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color onSurface;
 
   @override
-  ThemeExtension<AppColorsExtension> copyWith({
+  AppColorsExtension copyWith({
     Color? primary,
     Color? onPrimary,
     Color? secondary,
@@ -37,47 +38,46 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     Color? onBackground,
     Color? surface,
     Color? onSurface,
-  }) {
-    return AppColorsExtension(
-      primary: primary ?? this.primary,
-      onPrimary: onPrimary ?? this.onPrimary,
-      secondary: secondary ?? this.secondary,
-      onSecondary: onSecondary ?? this.onSecondary,
-      error: error ?? this.error,
-      onError: onError ?? this.onError,
-      background: background ?? this.background,
-      onBackground: onBackground ?? this.onBackground,
-      surface: surface ?? this.surface,
-      onSurface: onSurface ?? this.onSurface,
-    );
-  }
+  }) =>
+      AppColorsExtension(
+        primary: primary ?? this.primary,
+        onPrimary: onPrimary ?? this.onPrimary,
+        secondary: secondary ?? this.secondary,
+        onSecondary: onSecondary ?? this.onSecondary,
+        error: error ?? this.error,
+        onError: onError ?? this.onError,
+        background: background ?? this.background,
+        onBackground: onBackground ?? this.onBackground,
+        surface: surface ?? this.surface,
+        onSurface: onSurface ?? this.onSurface,
+      );
 
   @override
-  ThemeExtension<AppColorsExtension> lerp(
-    covariant ThemeExtension<AppColorsExtension>? other,
+  AppColorsExtension lerp(
+    covariant AppColorsExtension? other,
     double t,
-  ) {
-    if (other is! AppColorsExtension) {
-      return this;
-    }
-
-    return AppColorsExtension(
-      primary: Color.lerp(primary, other.primary, t)!,
-      onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
-      secondary: Color.lerp(secondary, other.secondary, t)!,
-      onSecondary: Color.lerp(onSecondary, other.onSecondary, t)!,
-      error: Color.lerp(error, other.error, t)!,
-      onError: Color.lerp(onError, other.onError, t)!,
-      background: Color.lerp(background, other.background, t)!,
-      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
-      surface: Color.lerp(surface, other.surface, t)!,
-      onSurface: Color.lerp(onSurface, other.onSurface, t)!,
-    );
-  }
+  ) =>
+      AppColorsExtension(
+        primary: Color.lerp(primary, other?.primary, t)!,
+        onPrimary: Color.lerp(onPrimary, other?.onPrimary, t)!,
+        secondary: Color.lerp(secondary, other?.secondary, t)!,
+        onSecondary: Color.lerp(onSecondary, other?.onSecondary, t)!,
+        error: Color.lerp(error, other?.error, t)!,
+        onError: Color.lerp(onError, other?.onError, t)!,
+        background: Color.lerp(background, other?.background, t)!,
+        onBackground: Color.lerp(onBackground, other?.onBackground, t)!,
+        surface: Color.lerp(surface, other?.surface, t)!,
+        onSurface: Color.lerp(onSurface, other?.onSurface, t)!,
+      );
 }
 
-/// Optional. If you also want to assign colors in the `ColorScheme`.
 extension ColorSchemeBuilder on AppColorsExtension {
+  /// Converts the given [brightness] to a [ColorScheme].
+  ///
+  /// The [brightness] parameter specifies the brightness of the color scheme.
+  ///
+  /// Returns a [ColorScheme] object with the specified brightness and other
+  /// color properties.
   ColorScheme toColorScheme(Brightness brightness) {
     return ColorScheme(
       brightness: brightness,

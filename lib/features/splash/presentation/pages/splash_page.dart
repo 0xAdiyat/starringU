@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:starring_u/router/config.routes.dart';
 
-import '../../../shared/presentation/widgets/standard_error_widget.dart';
-import '../../../shared/presentation/widgets/standard_loading_widget.dart';
+import '../../../../core/shared/presentation/widgets/standard_error_widget.dart';
+import '../../../../core/shared/presentation/widgets/standard_loading_widget.dart';
 import '../providers/splash_loading.provider.dart';
 
 class SplashPage extends ConsumerWidget {
